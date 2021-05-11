@@ -161,7 +161,7 @@
       VALUES ('$NOMBRE', '$APELLIDO_1', '$APELLIDO_2', '$SEXO' , '$DIRECCION' ,'$CORREO','$TELEFONO','$FECHA_NACIMIENTO','$POBLACION','$PROVINCIA','$CONTRASENA','$DNI')";
 
       if (mysqli_query($con, $sql)) {
-        echo ""; //"<h4>Nuevo registro creado correctamente</h4>";
+        echo "Nuevo registro creado correctamente"; 
         
       } else {
         echo "Error al dar de alta el libro: " . $sql . "<br>" . mysqli_error($con);
