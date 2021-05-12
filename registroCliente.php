@@ -109,6 +109,7 @@
           <th> PROVINCIA </th>
           <th> CONTRASENA </th>
           <th> DNI </th>
+          <th> TWITTER </th>
           </tr>";
 
           while ($row = mysqli_fetch_assoc($result)) {
@@ -125,7 +126,8 @@
             <td> " . $row["POBLACION"] . "</td>   
             <td> " . $row["PROVINCIA"] . "</td>  
             <td> " . $row["CONTRASENA"] . "</td>  
-            <td> " . $row["DNI"] . "</td>     
+            <td> " . $row["DNI"] . "</td>  
+            <td> " . $row["TWITTER"] . "</td>    
             </tr>";
           }
         } else {
@@ -156,9 +158,10 @@
       $PROVINCIA = $_POST['PROVINCIA'];
       $CONTRASENA = $_POST['CONTRASENA'];
       $DNI = $_POST['DNI'];
+      $TWITTER = $_POST['TWITTER'];
 
-      $sql = "INSERT INTO clientes (NOMBRE,APELLIDO_1,APELLIDO_2,SEXO,DIRECCION,CORREO,TELEFONO,FECHA_NACIMIENTO,POBLACION,PROVINCIA,CONTRASENA,DNI) 
-      VALUES ('$NOMBRE', '$APELLIDO_1', '$APELLIDO_2', '$SEXO' , '$DIRECCION' ,'$CORREO','$TELEFONO','$FECHA_NACIMIENTO','$POBLACION','$PROVINCIA','$CONTRASENA','$DNI')";
+      $sql = "INSERT INTO clientes (NOMBRE,APELLIDO_1,APELLIDO_2,SEXO,DIRECCION,CORREO,TELEFONO,FECHA_NACIMIENTO,POBLACION,PROVINCIA,CONTRASENA,DNI,TWITTER) 
+      VALUES ('$NOMBRE', '$APELLIDO_1', '$APELLIDO_2', '$SEXO' , '$DIRECCION' ,'$CORREO','$TELEFONO','$FECHA_NACIMIENTO','$POBLACION','$PROVINCIA','$CONTRASENA','$DNI','$TWITTER')";
 
       if (mysqli_query($con, $sql)) {
         echo ""; //"<h4>Nuevo registro creado correctamente</h4>";

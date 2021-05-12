@@ -93,6 +93,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
                 <th> PROVINCIA </th>
                 <th> CONTRASENA </th>
                 <th> DNI </th>
+                <th> TWITTER </th>
                 </tr>";
 
                 while ($row = mysqli_fetch_assoc($result)) {
@@ -109,7 +110,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
                     <td> " . $row["POBLACION"] . "</td>   
                     <td> " . $row["PROVINCIA"] . "</td>  
                     <td> " . $row["CONTRASENA"] . "</td>  
-                    <td> " . $row["DNI"] . "</td>     
+                    <td> " . $row["DNI"] . "</td>  
+                    <td> " . $row["TWITTER"] . "</td>   
                     </tr>";
                 }
             } else {
