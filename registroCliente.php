@@ -61,13 +61,12 @@
   <!-- Navbar on small screens (Hidden on medium and large screens) -->
   <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
     <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-      <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">NUEVA ALTA</a>
-      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">REGISTROS</a>
-      <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">CONSULTA</a>
-      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">MODIFICACION</a>
-      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">BORRADO</a>
-
+    <a href="index.html" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="mostrarClientes.php" class="w3-bar-item w3-button" style="width:25% !important">LISTA CLIENTES</a>
+    <a href="altaCliente.html"  class="w3-bar-item w3-button" style="width:25% !important">ALTA CLIENTE</a>
+    <a href="consulta.html" class="w3-bar-item w3-button" style="width:25% !important">CONSULTA</a>
+    <a href="modificado.html" class="w3-bar-item w3-button" style="width:25% !important">MODIFICAR</a>
+    <a href="borrado.html" class="w3-bar-item w3-button" style="width:25% !important">BORRAR</a>
     </div>
   </div>
   <!-- Page Content -->
@@ -78,8 +77,7 @@
       <img src="imagenes/img.jpg" alt="" class="w3-image" width="992" height="1108">
     </header>
 
-    <body>
-      <?php
+  <?php
 
       function mostrardatos()
       {
@@ -174,7 +172,6 @@
       //ahora llamamos a la funcion de mostrar datos, tras habernos conectado a nuestra bdd
       mostrardatos();
       ?>
-    </body>
 
     <!-- Footer -->
     <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
@@ -188,10 +185,6 @@
 
     <!-- END PAGE CONTENT -->
   </div>
-
-</body>
-
-</html>
 
 </body>
 
