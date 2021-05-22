@@ -75,15 +75,28 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         $ENCUENTRAERROR=1;
       }
       else {
-        $NOMBRE = test_input($_POST["NOMBRE"]);
+        if (strlen($NOMBRE)>50) {
+          $NOMBREERR="Nombre no puede tener mas de 50 caracteres";
+          $ENCUENTRAERROR=1;
+        }
+        else {
+          $NOMBRE = test_input($_POST["NOMBRE"]);
+        }
       }
       if (empty($_POST['APELLIDO_1'])) {
         $APELLIDO_1ERR="El primer apellido es un campo obligatorio";
         $ENCUENTRAERROR=1;
       }
       else {
-        $APELLIDO_1 = test_input($_POST['APELLIDO_1']);
+        if (strlen($APELLIDO_1)>50) {
+          $APELLIDO_1ERR="El primer apellido no puede tener mas de 50 caracteres";
+          $ENCUENTRAERROR=1;
+        }
+        else {
+          $APELLIDO_1 = test_input($_POST['APELLIDO_1']);
+        } 
       }
+      $APELLIDO_2 = test_input($_POST['APELLIDO_2']);
       if (empty($_POST['SEXO'])) {
         $SEXOERR="Sexo es un campo obligatorio";
         $ENCUENTRAERROR=1;
@@ -98,26 +111,25 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       else {
         $DIRECCION = test_input($_POST['DIRECCION']);
       }
-      if (empty($_POST['DIRECCION'])) {
-        $DIRECCIONERR="Direccion es un campo obligatorio";
-        $ENCUENTRAERROR=1;
-      }
-      else {
-        $DIRECCION = test_input($_POST['DIRECCION']);
-      }
       if (empty($_POST['CORREO'])) {
         $CORREOERR="Correo es un campo obligatorio";
         $ENCUENTRAERROR=1;
       }
       else {
-        $CORREO = test_input($_POST['CORREO']);
+          $CORREO = test_input($_POST['CORREO']);
       }
       if (empty($_POST['TELEFONO'])) {
         $TELEFONOERR="Telefono es un campo obligatorio";
         $ENCUENTRAERROR=1;
       }
       else {
-        $TELEFONO = test_input($_POST['TELEFONO']);
+        if (strlen($TELEFONO)!=9) {
+          $TELEFONOERR="El telefono tiene que tener 9 digitos";
+          $ENCUENTRAERROR=1;
+        }
+        else {
+          $TELEFONO = test_input($_POST['TELEFONO']);
+        } 
       }
       if (empty($_POST['FECHA_NACIMIENTO'])) {
         $FECHA_NACIMIENTOERR="Fecha de nacimiento es un campo obligatorio";
@@ -131,30 +143,55 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         $ENCUENTRAERROR=1;
       }
       else {
-        $POBLACION = test_input($_POST['POBLACION']);
+        if (strlen($POBLACION)>50) {
+          $POBLACIONERR="La poblacion no puede tener mas de 50 caracteres";
+          $ENCUENTRAERROR=1;
+        }
+        else {
+          $POBLACION = test_input($_POST['POBLACION']);
+        } 
       }
       if (empty($_POST['PROVINCIA'])) {
         $PROVINCIAERR="Provincia es un campo obligatorio";
         $ENCUENTRAERROR=1;
       }
       else {
-        $PROVINCIA = test_input($_POST['PROVINCIA']);
+        if (strlen($PROVINCIA)>25) {
+          $PROVINCIAERR="La provincia no puede tener mas de 25 caracteres";
+          $ENCUENTRAERROR=1;
+        }
+        else {
+          $PROVINCIA = test_input($_POST['PROVINCIA']);
+        } 
       }
       if (empty($_POST['CONTRASENA'])) {
         $CONTRASENAERR="Contraseña es un campo obligatorio";
         $ENCUENTRAERROR=1;
       }
       else {
-        $CONTRASENA = test_input($_POST['CONTRASENA']);
+        if (strlen($CONTRASENA)>15) {
+          $CONTRASENAERR="La contraseña no puede tener mas de 15 caracteres";
+          $ENCUENTRAERROR=1;
+        }
+        else {
+          $CONTRASENA = test_input($_POST['CONTRASENA']);
+        } 
       }
       if (empty($_POST['DNI'])) {
         $DNIERR="DNI es un campo obligatorio";
         $ENCUENTRAERROR=1;
       }
       else {
-        $DNI = test_input($_POST['DNI']);
+        
+        if (strlen($DNI)!=9) {
+          $DNIERR="El DNI tiene que tener 9 caracteres";
+          $ENCUENTRAERROR=1;
+        }
+        else {
+          $DNI = test_input($_POST['DNI']);
+        } 
       }
-     
+      $TWITTER = test_input($_POST['TWITTER']);
      }
      function test_input($data){
        $data = trim($data);
@@ -258,7 +295,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       $DNI = $_POST['DNI'];
       $TWITTER = $_POST['TWITTER'];
 
-      //incluir un if para cazar error por campo vacio 
       $sql = "INSERT INTO clientes (NOMBRE,APELLIDO_1,APELLIDO_2,SEXO,DIRECCION,CORREO,TELEFONO,FECHA_NACIMIENTO,POBLACION,PROVINCIA,CONTRASENA,DNI,TWITTER) 
       VALUES ('$NOMBRE', '$APELLIDO_1', '$APELLIDO_2', '$SEXO' , '$DIRECCION' ,'$CORREO','$TELEFONO','$FECHA_NACIMIENTO','$POBLACION','$PROVINCIA','$CONTRASENA','$DNI','$TWITTER')";
 
@@ -266,7 +302,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         echo ""; //"<h4>Nuevo registro creado correctamente</h4>";
         
       } else {
-        echo "Error al dar de alta el libro: " . $sql . "<br>" . mysqli_error($con);
+        echo "Error al dar de alta al cliente: " . $sql . "<br>" . mysqli_error($con);
        
       }
       mysqli_close($con);

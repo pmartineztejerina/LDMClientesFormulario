@@ -69,40 +69,230 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <h2>MODIFICAR</h2>
 </div>
   <?php
-     $con = mysqli_connect("localhost", "root", "", "registroclientes") or die("Problemas con la conexion");
-     //servername,username,password,bddname
-     if (mysqli_connect_errno()) {
-         echo "Failed to connect to MySQL: " . mysqli_connect_error();
-         exit();
+$ENCUENTRAERROR=0; 
+$NOMBREERR = $APELLIDO_1ERR = $SEXOERR = $DIRECCIONERR = $CORREOERR = $TELEFONOERR = $FECHA_NACIMIENTOERR = $POBLACIONERR = $PROVINCIAERR = $CONTRASENAERR = $DNIERR="";
+$NOMBRE = $APELLIDO_1 = $SEXO = $DIRECCION = $CORREO = $TELEFONO = $FECHA_NACIMIENTO = $POBLACION = $PROVINCIA = $CONTRASENA = $DNI="";
+if ($_SERVER["REQUEST_METHOD"]=="POST") {
+
+ if (empty($_POST["NOMBRENUEVO"])) {
+   $NOMBREERR="Nombre es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+   if (strlen($NOMBRE)>50) {
+     $NOMBREERR="Nombre no puede tener mas de 50 caracteres";
+     $ENCUENTRAERROR=1;
+   }
+   else {
+     $NOMBRE = test_input($_POST["NOMBRENUEVO"]);
+   }
+ }
+ if (empty($_POST['APELLIDO_1NUEVO'])) {
+   $APELLIDO_1ERR="El primer apellido es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+   if (strlen($APELLIDO_1)>50) {
+     $APELLIDO_1ERR="El primer apellido no puede tener mas de 50 caracteres";
+     $ENCUENTRAERROR=1;
+   }
+   else {
+     $APELLIDO_1 = test_input($_POST['APELLIDO_1NUEVO']);
+   } 
+ }
+$APELLIDO_2 = test_input($_POST['APELLIDO_2NUEVO']);
+ if (empty($_POST['SEXONUEVO'])) {
+   $SEXOERR="Sexo es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+   $SEXO = test_input($_POST['SEXONUEVO']);
+ }
+ if (empty($_POST['DIRECCIONNUEVO'])) {
+   $DIRECCIONERR="Direccion es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+   $DIRECCION = test_input($_POST['DIRECCIONNUEVO']);
+ }
+ if (empty($_POST['CORREONUEVO'])) {
+   $CORREOERR="Correo es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+     $CORREO = test_input($_POST['CORREONUEVO']);
+ }
+ if (empty($_POST['TELEFONONUEVO'])) {
+   $TELEFONOERR="Telefono es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+   if (strlen($_POST['TELEFONONUEVO'])!=9) {
+     $TELEFONOERR="El telefono tiene que tener 9 digitos";
+     $ENCUENTRAERROR=1;
+   }
+   else {
+     $TELEFONO = test_input($_POST['TELEFONONUEVO']);
+   } 
+ }
+ $FECHA_NACIMIENTO = test_input($_POST['FECHA_NACIMIENTONUEVO']);
+ if (empty($_POST['POBLACIONNUEVO'])) {
+   $POBLACIONERR="Poblacion es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+   if (strlen($POBLACION)>50) {
+     $POBLACIONERR="La poblacion no puede tener mas de 50 caracteres";
+     $ENCUENTRAERROR=1;
+   }
+   else {
+     $POBLACION = test_input($_POST['POBLACIONNUEVO']);
+   } 
+ }
+ if (empty($_POST['PROVINCIANUEVO'])) {
+   $PROVINCIAERR="Provincia es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+   if (strlen($PROVINCIA)>25) {
+     $PROVINCIAERR="La provincia no puede tener mas de 25 caracteres";
+     $ENCUENTRAERROR=1;
+   }
+   else {
+     $PROVINCIA = test_input($_POST['PROVINCIANUEVO']);
+   } 
+ }
+ if (empty($_POST['CONTRASENANUEVO'])) {
+   $CONTRASENAERR="Contraseña es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+   if (strlen($CONTRASENA)>15) {
+     $CONTRASENAERR="La contraseña no puede tener mas de 15 caracteres";
+     $ENCUENTRAERROR=1;
+   }
+   else {
+     $CONTRASENA = test_input($_POST['CONTRASENANUEVO']);
+   } 
+ }
+ if (empty($_POST['DNINUEVO'])) {
+   $DNIERR="DNI es un campo obligatorio";
+   $ENCUENTRAERROR=1;
+ }
+ else {
+   if (strlen($_POST['DNINUEVO'])!=9) {
+     $DNIERR="El DNI tiene que tener 9 caracteres";
+     $ENCUENTRAERROR=1;
+   }
+   else {
+     $DNI = test_input($_POST['DNINUEVO']);
+   } 
+ }
+$TWITTER = test_input($_POST['TWITTERNUEVO']);
+}
+function test_input($data){
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+ function mostrardatos()
+ {
+   $con = mysqli_connect("localhost", "root", "", "registroclientes") or die("Problemas con la conexion");
+   //servername,username,password,bddname
+   if (mysqli_connect_errno()) {
+     echo "Failed to connect to MySQL: " . mysqli_connect_error();
+     exit();
+   }
+   $sql = "SELECT * FROM clientes";
+
+   $result = mysqli_query($con, $sql) or
+     die("Problemas en el select:" . mysqli_error($con));
+
+   if (mysqli_num_rows($result) > 0) {
+     echo "<table class='tabla'>
+     <tr>
+     <th> NOMBRE </th>
+     <th> APELLIDO_1 </th>
+     <th> APELLIDO_2 </th>
+     <th> SEXO </th>
+     <th> DIRECCION </th>
+     <th> CORREO </th>
+     <th> TELEFONO </th>
+     <th> FECHA_NACIMIENTO </th>
+     <th> POBLACION </th>
+     <th> PROVINCIA </th>
+     <th> CONTRASENA </th>
+     <th> DNI </th>
+     <th> TWITTER </th>
+     </tr>";
+
+     while ($row = mysqli_fetch_assoc($result)) {
+
+       echo "<tr>
+       <td> " . $row["NOMBRE"] . "</td>
+       <td> " . $row["APELLIDO_1"] . "</td>
+       <td> " . $row["APELLIDO_2"] . "</td>
+       <td> " . $row["SEXO"] . "</td>
+       <td> " . $row["DIRECCION"] . "</td>
+       <td> " . $row["CORREO"] . "</td>
+       <td> " . $row["TELEFONO"] . "</td>
+       <td> " . $row["FECHA_NACIMIENTO"] . "</td>
+       <td> " . $row["POBLACION"] . "</td>   
+       <td> " . $row["PROVINCIA"] . "</td>  
+       <td> " . $row["CONTRASENA"] . "</td>  
+       <td> " . $row["DNI"] . "</td>  
+       <td> " . $row["TWITTER"] . "</td>    
+       </tr>";
      }
-    $sql = "SELECT * FROM clientes WHERE CORREO='$_REQUEST[MAILVIEJO]'";
+   } else {
+     echo "0 results";
+   }
+   echo "</table>";
+   mysqli_close($con);
+ }
+ //aqui se cierra la funcion mostrardatos
 
-    $result = mysqli_query($con, $sql) or die("Problemas en el select:" . mysqli_error($con));
-    if ($reg = mysqli_fetch_array($result)) {   
+ //ahora nos conectamos a la base de datos
+ //comprobamos si ha encontrado algun error
+if ($ENCUENTRAERROR==1) {
+ echo $NOMBREERR;
+ echo $APELLIDO_1ERR;
+ echo $SEXOERR;
+ echo $DIRECCIONERR;
+ echo $CORREOERR;
+ echo $TELEFONOERR;
+ echo $FECHA_NACIMIENTOERR;
+ echo $POBLACIONERR;
+ echo $PROVINCIAERR;
+ echo $CONTRASENAERR;
+ echo $DNIERR;
+}
+else {
+       
+ $con = mysqli_connect("localhost", "root", "", "registroclientes") or die("Problemas con la conexión");
 
-        $con = mysqli_connect("localhost", "root", "", "registroclientes") or die("Problemas con la conexion");
-            //servername,username,password,bddname
-            if (mysqli_connect_errno()) {
-                echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                exit();
-            }
-        $sql = "UPDATE clientes SET CORREO='$_REQUEST[MAILNUEVO]'
-                                WHERE CORREO='$_REQUEST[MAILVIEJO]'";
+ if (mysqli_connect_errno()) {
+   echo "Failed to connect to MySQL: " . mysqli_connect_error();
+   exit();
+ }
 
-        if(mysqli_query($con, $sql)){
-            echo "El mail fue modificado con exito";
-        }
-        else{
-            echo "ERROR: No se ejecuto $sql. " . mysqli_error($con);
-        }
-        mysqli_close($con);
+ $sql = "UPDATE clientes set NOMBRE='$NOMBRE',APELLIDO_1='$APELLIDO_1',APELLIDO_2='$APELLIDO_2',SEXO='$SEXO',DIRECCION='$DIRECCION',CORREO='$CORREO',TELEFONO='$TELEFONO',FECHA_NACIMIENTO='$FECHA_NACIMIENTO',POBLACION='$POBLACION',PROVINCIA='$PROVINCIA',CONTRASENA='$CONTRASENA', DNI='$DNI', TWITTER='$TWITTER'
+   where CORREO='$_REQUEST[CORREOVIEJO]'";
 
-    } else{
-        echo "No existe cliente con dicho mail";
-        mysqli_close($con); 
-    }        
-  ?>
-</div>
+ if (mysqli_query($con, $sql)) {
+   echo ""; //"<h4>Cliente modificado con exito</h4>";
+   
+ } else {
+   echo "Error al modificar el cliente: " . $sql . "<br>" . mysqli_error($con);
+  
+ }
+ mysqli_close($con);
+ //ahora llamamos a la funcion de mostrar datos, tras habernos conectado a nuestra bdd
+ mostrardatos();
+}
+ ?>
 <!-- Footer -->
 <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
   <a href="https://github.com/pmartineztejerina">

@@ -70,7 +70,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   </div>
   <form action="registroCliente.php" method="post">  
     <p>      
-    <label class="w3-text-white"><b>Ingrese nombre: *</b></label>
+    <label class="w3-text-white"><b>Ingrese nombre: *</b></label>               
     <input class="w3-input w3-border w3-sand" type="text" name="NOMBRE" requiered placeholder="Ej: Pili" maxlength="50" pattern="^([A-Z]{1}[a-z]+[ ]?){1,2}$">
     </p>
     <p>      
@@ -97,7 +97,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     </p>
     <p>      
     <label class="w3-text-white"><b>Telefono *: </b></label>
-    <input class="w3-input w3-border w3-sand" type="tel" name="TELEFONO" required placeholder="Ej: 956123456" maxlength="9">
+    <input class="w3-input w3-border w3-sand" type="tel" name="TELEFONO" required placeholder="Ej: 956123456" minlength="9" maxlength="9">
     </p>
     <p>      
     <label class="w3-text-white"><b>Fecha de nacimiento *: </b></label>
@@ -117,7 +117,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     </p>
     <p>        
     <label class="w3-text-white"><b>Dni: *</b></label>
-    <input class="w3-input w3-border w3-sand" type="text" name="DNI" required placeholder="Ej: 12345678X" maxlength="9" pattern="^[0-9]{8}[T|R|W|A|G|M|Y|F|P|D|X|B|N|J|Z|S|Q|V|H|L|C|K|E]$">
+    <input class="w3-input w3-border w3-sand" type="text" name="DNI" required placeholder="Ej: 12345678X" minlength="9" maxlength="9" pattern="^[0-9]{8}[T|R|W|A|G|M|Y|F|P|D|X|B|N|J|Z|S|Q|V|H|L|C|K|E]$">
     </p>
     <p>        
     <label class="w3-text-white"><b>Twitter: *</b></label>
