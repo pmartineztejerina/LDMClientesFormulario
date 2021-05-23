@@ -75,7 +75,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
          echo "Failed to connect to MySQL: " . mysqli_connect_error();
          exit();
      }
-    $sql = "SELECT * FROM clientes WHERE CORREO='$_REQUEST[CORREO]'";
+    /*$CORREO=($_GET["CORREO"]);
+    
+    $sql = "SELECT * FROM clientes WHERE CORREO='$_REQUEST[CORREO]'";*/
+    $sql = "SELECT * FROM clientes WHERE CORREO='$CORREO'";
 
     $result = mysqli_query($con, $sql) or die("Problemas en el select:" . mysqli_error($con));
     if ($reg = mysqli_fetch_array($result)) {   
@@ -96,7 +99,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
             echo "ERROR: No se ejecuto $sql. " . mysqli_error($con);
         }
         mysqli_close($con);
-
+        
     } else{
         echo "No existe cliente con dicho mail";
         mysqli_close($con);  

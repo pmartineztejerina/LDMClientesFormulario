@@ -95,7 +95,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
                 </tr>";
 
                 while ($row = mysqli_fetch_assoc($result)) {
-
+                  /*<td> <a href='borradoCliente.php?CORREO=$row[CORREO]'>" . $row["CORREO"] . "</a></td>*/
+                  
                     echo "<tr>
                     <td> " . $row["NOMBRE"] . "</td>
                     <td> " . $row["APELLIDO_1"] . "</td>

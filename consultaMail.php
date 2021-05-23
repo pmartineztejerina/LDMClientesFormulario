@@ -73,7 +73,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
                 exit();
             }
             $sql = "SELECT * FROM clientes WHERE CORREO LIKE '%$_REQUEST[CORREO]%'";
-
+            
             $result = mysqli_query($con, $sql) or
             die("Problemas en el select:" . mysqli_error($con));
 

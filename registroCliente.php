@@ -123,8 +123,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         $ENCUENTRAERROR=1;
       }
       else {
-        if (strlen($TELEFONO)!=9) {
-          $TELEFONOERR="El telefono tiene que tener 9 digitos";
+        if (strlen($TELEFONO)>9) {
+          $TELEFONOERR="El telefono no puede tener mas de 9 digitos";
           $ENCUENTRAERROR=1;
         }
         else {
@@ -183,8 +183,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       }
       else {
         
-        if (strlen($DNI)!=9) {
-          $DNIERR="El DNI tiene que tener 9 caracteres";
+        if (strlen($DNI)>9) {
+          $DNIERR="El DNI no puede tener mas de 9 caracteres";
           $ENCUENTRAERROR=1;
         }
         else {
